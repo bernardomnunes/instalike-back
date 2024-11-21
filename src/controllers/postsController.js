@@ -1,4 +1,7 @@
-// Controla as coisas (ex: req e res)
+// Recebem as requisições HTTP (GET, POST, PUT, DELETE, etc.).
+// Validam os dados recebidos.
+// Chamam os models para acessar ou modificar dados no banco de dados.
+// Preparam a resposta a ser enviada ao usuário.
 
 import getTodosPosts from "../models/postsModels.js";
 
