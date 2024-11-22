@@ -5,8 +5,14 @@ import conectarAoBanco from "../config/dbConfig.js";
 
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
 
-export default async function getTodosPosts() {
-  const db = conexao.db("instabytes");
+const db = conexao.db("instabytes");
+
+export async function getTodosPosts() {
   const colecao = db.collection("posts");
   return colecao.find().toArray();
+}
+
+export async function criarPost(novoPost) {
+  const colecao = db.collection("posts");
+  return colecao.insertOne(novoPost);
 }
