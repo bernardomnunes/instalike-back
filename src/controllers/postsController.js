@@ -9,7 +9,10 @@ import {
   criarPost,
   atualizarPost,
 } from "../models/postsModels.js";
-import gerarDescricaoComGemini from "../services/geminiService.js";
+import {
+  gerarDescricaoComGemini,
+  gerarTextoAlternativo,
+} from "../services/geminiService.js";
 
 export async function listarPosts(req, res) {
   const posts = await getTodosPosts();
@@ -51,12 +54,13 @@ export async function atualizarNovoPost(req, res) {
 
   try {
     const imgBuffer = fs.readFileSync(`uploads/${id}.jpg`);
-    const descricao = await gerarDescricaoComGemini(imgBuffer);
+    const alt = await gerarTextoAlternativo(imgBuffer);
+    const descricao = await gerarTextoAlternativo(imgBuffer);
 
     const post = {
       imgUrl: urlImagem,
       descricao: descricao,
-      alt: req.body.alt,
+      alt: alt,
     };
 
     const novoPost = await atualizarPost(id, post);
