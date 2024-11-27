@@ -50,12 +50,12 @@ export async function uploadImagem(req, res) {
 
 export async function atualizarNovoPost(req, res) {
   const id = req.params.id;
-  const urlImagem = `http://localhost:3000/${id}.jpg`;
+  const urlImagem = `http://https://instalike-back-184654879223.southamerica-east1.run.app/${id}.jpg`;
 
   try {
     const imgBuffer = fs.readFileSync(`uploads/${id}.jpg`);
     const alt = await gerarTextoAlternativo(imgBuffer);
-    const descricao = await gerarTextoAlternativo(imgBuffer);
+    const descricao = await gerarDescricaoComGemini(imgBuffer);
 
     const post = {
       imgUrl: urlImagem,
